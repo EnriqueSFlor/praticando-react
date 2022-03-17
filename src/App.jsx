@@ -1,48 +1,49 @@
 import React, { Component } from "react";
 
-class Equipe extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: "Matheus",
+      contador: 0,
+    };
+
+    this.aumentar = this.aumentar.bind(this);
+    this.diminuir = this.diminuir.bind(this);
+    this.mudarNome = this.mudarNome.bind(this);
+  }
+
+  aumentar() {
+    let state = this.state;
+    state.contador += 1;
+
+    this.setState(state);
+  }
+
+  diminuir() {
+    let state = this.state;
+    state.contador -= 1;
+    this.setState(state);
+  }
+
+  mudarNome() {
+    let state = this.state;
+    state.nome = "Enrique";
+    this.setState(state);
+  }
+
   render() {
     return (
       <div>
-        <Sobre
-          nome={this.props.nome}
-          cargo={this.props.cargo}
-          idade={this.props.idade}
-        />
-        <Social facebook="http://google.com.br" />
-        <hr />
+        <h1>Contador</h1>
+        <h3>
+          <button onClick={this.diminuir}>-</button>
+          {this.state.contador}
+          <button onClick={this.aumentar}>+</button> <hr />
+          <p>{this.state.nome}</p>
+          <button onClick={this.mudarNome}>Mudar nome</button>
+        </h3>
       </div>
     );
   }
-}
-
-class Sobre extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Olá sou o(a) {this.props.nome}</h2>
-        <h3>{this.props.cargo}</h3>
-        <h3>{this.props.idade}</h3>
-      </div>
-    );
-  }
-}
-
-const Social = (props) => {
-  return (
-    <div>
-      <a href={props.facebook}>Facebook </a>
-      <a href={props.facebook}>Instagran </a>
-    </div>
-  );
-};
-
-export default function App() {
-  return (
-    <div>
-      <h1>Conheça nossa equipe</h1>
-      <Equipe nome="Enrique" cargo="Programador" idade="28" />
-      <Equipe nome="Eduardo" cargo="Motoboy" idade="33" />
-    </div>
-  );
 }
